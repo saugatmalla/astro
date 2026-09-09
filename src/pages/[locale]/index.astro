@@ -1,0 +1,32 @@
+---
+import { getRelativeLocaleUrlList } from "astro:i18n";
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/button";
+
+export async function getStaticPaths() {
+  // Use Astro's i18n utility to get a list of locale-specific paths
+  const paths = getRelativeLocaleUrlList();
+
+  // Transform the paths into the format required by Astro
+  return paths.map((url) => {
+    // Extract the locale from the path. This assumes every locale has a prefix.
+    const locale = url.split("/")[1];
+
+    // Return an object with the locale as a route parameter for Astro to generate the page
+    return { params: { locale } };
+  });
+}
+
+const locale = Astro.params.locale;
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+  {locale}
+  <h1>Astro Home</h1>
+
+  <div style="height: 150vh"></div>
+
+  <Button client:visible />
+</Layout>

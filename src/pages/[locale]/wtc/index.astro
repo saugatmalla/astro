@@ -1,0 +1,37 @@
+---
+import { getRelativeLocaleUrlList } from "astro:i18n";
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const paths = getRelativeLocaleUrlList();
+  const wtcContents = await getCollection("wtc");
+
+  return wtcContents.map((page) => {
+    const locale = page.id.split("/")?.at(-1)?.replace(".yml", "");
+
+    return { params: { locale }, props: { page } };
+  });
+}
+
+const locale = Astro.params.locale;
+const page = Astro.props.page;
+const { name, title, phone, description } = page?.data;
+---
+
+<Layout>
+  <p>Route: {locale}</p>
+  <dl>
+    <dt>Name:</dt>
+    <dd>{name}</dd>
+
+    <dt>Title:</dt>
+    <dd>{title}</dd>
+
+    <dt>Description:</dt>
+    <dd>{description}</dd>
+
+    <dt>Phone:</dt>
+    <dd>{phone}</dd>
+  </dl>
+</Layout>
