@@ -1,0 +1,38 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { locales } from "../../const";
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const currentPath = Astro.url.pathname.split("/").slice(2).join("/");
+---
+
+<header>
+  <nav aria-label="Language selector">
+    <label>
+      Language
+      <select>
+        {locales.map((availableLocale) => (
+          <option
+            value={getRelativeLocaleUrl(availableLocale, currentPath)}
+            selected={availableLocale === locale}
+          >
+            {availableLocale}
+          </option>
+        ))}
+      </select>
+    </label>
+  </nav>
+</header>
+
+<script>
+  const localeSelector = document.querySelector("select");
+
+  localeSelector?.addEventListener("change", (event) => {
+    const select = event.currentTarget as HTMLSelectElement;
+    window.location.href = select.value;
+  });
+</script>

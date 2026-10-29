@@ -1,0 +1,18 @@
+eyebrow: "De Wikipédia, l'encyclopédie libre"
+title: "Chimacum Creek"
+description: "Chimacum Creek est un cours d'eau situé dans le comté de Jefferson, dans l'État de Washington, aux États-Unis. Situé à la base de la péninsule de Quimper, au nord-est de la plus grande péninsule Olympique, le bras principal (également connu sous le nom de West Chimacum Creek) prend sa source dans une série de sources et d'étangs dans les collines boisées au sud de Discovery Bay."
+primaryCta: "En savoir plus"
+secondaryCta: "Explorer l'idée"
+featureTitle: "Parcours"
+featureDescription: "La topographie du bassin versant a été fortement façonnée par l'avancée et le retrait de la calotte glaciaire de la Cordillère lors du dernier maximum glaciaire, qui a déposé de grandes quantités d'épandage fluvio-glaciaire et de matériaux sédimentaires."
+features:
+  - title: "Qualité de l'eau"
+    description: "Pendant la majeure partie de l'année, le bras principal s'écoule du lac Delanty ; cependant, pendant l'été, ce cours s'assèche et se forme plutôt à partir de sources et de suintements.[4][3] Il coule d'abord vers le sud puis vers l'est via un petit canyon à travers la communauté non constituée en municipalité de Center. Il coule ensuite vers le nord-est à travers la vallée de Center, recevant Barnstorm Creek comme affluent à 3,5 miles (5,6 km)."
+  - title: "Fumier de bétail"
+    description: "La plus grande préoccupation concernant la qualité de l'eau dans le bassin versant de Chimacum est la contamination du ruisseau par le fumier du bétail, ce qui risque de propager des agents pathogènes dans l'eau."
+  - title: "Débit"
+    description: "Environ 20 à 30 % du débit moyen du système est fourni par la fourche est (East Fork), le reste étant fourni par le bras principal (West Chimacum Creek)."
+
+contactTitle: "Restons en contact."
+contactDescription: "Le texte est disponible sous la licence Creative Commons Attribution-partage dans les mêmes conditions 4.0 ; des conditions supplémentaires peuvent s'appliquer. En utilisant ce site, vous acceptez les conditions d'utilisation et la politique de confidentialité. Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., une organisation à but non lucratif."
+contactCta: "Nous contacter"

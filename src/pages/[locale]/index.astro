@@ -1,32 +1,105 @@
 ---
 import { getRelativeLocaleUrlList } from "astro:i18n";
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import Button from "../../components/button";
+import Picture from "../../components/Picture/Picture.astro";
+
+import "./home.scss";
 
 export async function getStaticPaths() {
-  // Use Astro's i18n utility to get a list of locale-specific paths
   const paths = getRelativeLocaleUrlList();
+  const homeContents = await getCollection("home");
 
-  // Transform the paths into the format required by Astro
   return paths.map((url) => {
-    // Extract the locale from the path. This assumes every locale has a prefix.
     const locale = url.split("/")[1];
+    const page = homeContents.find((entry) => entry.id.endsWith(`/${locale}`));
 
-    // Return an object with the locale as a route parameter for Astro to generate the page
-    return { params: { locale } };
+    if (!page) {
+      throw new Error(`Missing home content for locale: ${locale}`);
+    }
+
+    return { params: { locale }, props: { page } };
   });
 }
 
 const locale = Astro.params.locale;
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const { data } = Astro.props.page;
 ---
 
-<Layout>
-  {locale}
-  <h1>Astro Home</h1>
+<Layout title={data.title} locale={locale}>
+  <header>
+    <a href={`/${locale}/`}>Wikipedia</a>
+    <nav aria-label="Main navigation">
+      <a href="#about">{data.featureTitle}</a>
+      <a href="#contact">{data.contactCta}</a>
+    </nav>
+    
+  </header>
 
-  <div style="height: 150vh"></div>
+  <main>
+    <section>
+      <p>{data.eyebrow}</p>
+      <h1>{data.title}</h1>
+      <p>{data.description}</p>
+      <div>
+        <a href="#contact">{data.primaryCta}</a>
+        <a href="#about">{data.secondaryCta}</a>
+      </div>
+      <Picture
+        src="/src/assets/1920px-Chimacum_Valley.webp"
+        alt="Night sky filled with star trails"
+      />
+    </section>
 
-  <Button client:visible />
+    <section id="about">
+      <p>01</p>
+      <h2>{data.featureTitle}</h2>
+      <p>{data.featureDescription}</p>
+    </section>
+
+    <section>
+      {data.features.map((feature, index) => (
+        <article>
+          <span>0{index + 1}</span>
+          <h3>{feature.title}</h3>
+          <p>{feature.description}</p>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <Picture
+        src="/src/assets/1920px-Chimacum_Valley.webp"
+        alt="A night landscape with a cross beneath circular star trails"
+      />
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </section>
+
+    <section id="story">
+      <Picture
+        src="/src/assets/Chimacum_Creek_in_Port_Hadlock,_Washington,_ca_1898-1899_(WASTATE_2549).jpeg"
+        alt="White flowers standing out against a dark background"
+      />
+    </section>
+
+    <section>
+      <Picture
+        src="/src/assets/Klallam_people_near_canoe.jpg"
+        alt="Mountain peak under a starry sky"
+      />
+    </section>
+
+    <section id="contact">
+      <p>03 / Lorem ipsum</p>
+      <h2>{data.contactTitle}</h2>
+      <p>{data.contactDescription}</p>
+      <a href={`/${locale}/wtc/`}>{data.contactCta}</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>Wikipedia</span>
+    <span>Text is available under the Creative Commons Attribution-ShareAlike 4.0 License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.</span>
+    <span>{locale}</span>
+  </footer>
 </Layout>
