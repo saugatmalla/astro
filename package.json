@@ -15,7 +15,8 @@
     "@astrojs/react": "^6.0.5",
     "astro": "^7.2.6",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "sass": "^1.107.0"
   },
   "allowScripts": {
     "esbuild": true
