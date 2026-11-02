@@ -1,6 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { locales } from "../../const";
+import "./header.scss";
 
 interface Props {
   locale: string;
@@ -8,12 +9,16 @@ interface Props {
 
 const { locale } = Astro.props;
 const currentPath = Astro.url.pathname.split("/").slice(2).join("/");
+const wtcPath = locale === "en-us" ? "/wtc/" : `/${locale}/wtc/`;
 ---
 
 <header>
-  <nav aria-label="Language selector">
+  
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href={wtcPath}>WTC</a>
     <label>
-      Language
+      Language Selector
       <select>
         {locales.map((availableLocale) => (
           <option
