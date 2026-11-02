@@ -1,37 +1,28 @@
 ---
-import { getRelativeLocaleUrlList } from "astro:i18n";
-import Layout from "../../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import WtcPage from "../../../components/WtcPage.astro";
+import { locales } from "../../../const";
 
 export async function getStaticPaths() {
-  const paths = getRelativeLocaleUrlList();
   const wtcContents = await getCollection("wtc");
 
-  return wtcContents.map((page) => {
-    const locale = page.id.split("/")?.at(-1)?.replace(".yml", "");
+  return locales
+    .filter((locale) => locale !== "en-us")
+    .map((locale) => {
+      const page = wtcContents.find((entry) => entry.id.split("/").at(-1) === locale);
 
-    return { params: { locale }, props: { page } };
-  });
+      if (!page) {
+        throw new Error(`Missing WTC content for locale: ${locale}`);
+      }
+
+      return { params: { locale }, props: { page } };
+    });
 }
 
 const locale = Astro.params.locale;
-const page = Astro.props.page;
-const { name, title, phone, description } = page?.data;
+if (!locale) {
+  throw new Error("Missing locale for localized WTC page");
+}
 ---
 
-<Layout>
-  <p>Route: {locale}</p>
-  <dl>
-    <dt>Name:</dt>
-    <dd>{name}</dd>
-
-    <dt>Title:</dt>
-    <dd>{title}</dd>
-
-    <dt>Description:</dt>
-    <dd>{description}</dd>
-
-    <dt>Phone:</dt>
-    <dd>{phone}</dd>
-  </dl>
-</Layout>
+<WtcPage locale={locale} page={Astro.props.page} />

@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import WtcPage from "../../components/WtcPage.astro";
+
+const wtcContents = await getCollection("wtc");
+const page = wtcContents.find((entry) => entry.id.split("/").at(-1) === "en-us");
+
+if (!page) {
+  throw new Error("Missing WTC content for locale: en-us");
+}
+---
+
+<WtcPage locale="en-us" page={page} />

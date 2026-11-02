@@ -9,7 +9,7 @@ export default defineConfig({
     defaultLocale: "en-us", // The default language used as a fallback
     locales: locales, // All supported languages on the site
     routing: {
-      prefixDefaultLocale: true, // URL structure will be:
+      prefixDefaultLocale: false, // en-us uses /; other locales use /:locale/
       // redirectToDefaultLocale: true
     },
   },

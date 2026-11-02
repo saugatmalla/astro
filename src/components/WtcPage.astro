@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+interface Props {
+  locale: string;
+  page: {
+    data: {
+      name: string;
+      title: string;
+      phone?: string;
+      description?: string;
+    };
+  };
+}
+
+const { locale, page } = Astro.props;
+const { name, title, phone, description } = page.data;
+---
+
+<Layout locale={locale}>
+  <p>Route: {locale}</p>
+  <dl>
+    <dt>Name:</dt>
+    <dd>{name}</dd>
+
+    <dt>Title:</dt>
+    <dd>{title}</dd>
+
+    <dt>Description:</dt>
+    <dd>{description}</dd>
+
+    <dt>Phone:</dt>
+    <dd>{phone}</dd>
+  </dl>
+</Layout>

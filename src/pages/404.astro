@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { locales } from "../const";
+import { notFoundText } from "../locales";
+
+const locale = locales.includes(Astro.url.pathname.split("/")[1])
+  ? Astro.url.pathname.split("/")[1]
+  : "en-us";
+---
+
+<Layout title={notFoundText[locale]} locale={locale}>
+  <main>
+    <h1>{notFoundText[locale]}</h1>
+    <a href={locale === "en-us" ? "/" : `/${locale}/`}>Go home</a>
+  </main>
+</Layout>

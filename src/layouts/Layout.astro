@@ -1,12 +1,12 @@
 ---
 import Header from "../components/Header/Header.astro";
-
+import "./layout.scss";
 interface Props {
 	title?: string;
 	locale?: string;
 }
 
-const { title = "Astro", locale = Astro.currentLocale ?? "en" } = Astro.props;
+const { title = "Astro", locale = Astro.currentLocale ?? "en-us" } = Astro.props;
 ---
 <!doctype html>
 <html lang={locale}>
@@ -23,12 +23,3 @@ const { title = "Astro", locale = Astro.currentLocale ?? "en" } = Astro.props;
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

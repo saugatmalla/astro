@@ -23,21 +23,13 @@ const home = defineCollection({
   }),
 
   schema: z.object({
-    eyebrow: z.string(),
-    title: z.string(),
-    description: z.string(),
-    primaryCta: z.string(),
-    secondaryCta: z.string(),
-    featureTitle: z.string(),
-    featureDescription: z.string(),
-    features: z.array(z.object({
-      title: z.string(),
-      description: z.string()
-    })),
-    
-    contactTitle: z.string(),
-    contactDescription: z.string(),
-    contactCta: z.string()
+    siteName: z.string(),
+    heading: z.string(),
+    description: z.string().optional(),
+    images: z.array(z.object({
+      src: z.string(),
+      alt: z.string()
+    }))
   })
 });
 
