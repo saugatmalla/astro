@@ -8,14 +8,14 @@ export async function getStaticPaths() {
 
   return locales
     .filter((locale) => locale !== "en-us")
-    .map((locale) => {
+    .flatMap((locale) => {
       const page = wtcContents.find((entry) => entry.id.split("/").at(-1) === locale);
 
       if (!page) {
-        throw new Error(`Missing WTC content for locale: ${locale}`);
+        return [];
       }
 
-      return { params: { locale }, props: { page } };
+      return [{ params: { locale }, props: { page } }];
     });
 }
 
